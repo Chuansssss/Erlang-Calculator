@@ -1,0 +1,61 @@
+Private Sub cmdCancel_Click()
+    Unload Me
+End Sub
+
+Private Sub cmdSubmit_Click()
+    Sheet1.Activate
+    
+    Range("A1").End(xlDown).Offset(1, 0).Select
+    
+    ActiveCell.Value = ActiveCell.Offset(-1, 0).Value + 1
+    
+    ActiveCell.Offset(0, 1).Value = txtArrivalRate.Value
+    lambda = txtArrivalRate.Value
+    
+    ActiveCell.Offset(0, 2).Value = txtServiceRate.Value
+    mew = txtServiceRate.Value
+    
+    ActiveCell.Offset(0, 3).Value = txtBlockingProb.Value
+    Prob = txtBlockingProb.Value
+    
+    c = 0
+    
+    If txtArrivalRate.Value >= txtServiceRate.Value Then
+        Do While True
+            c = c + 1
+            If (txtArrivalRate.Value - c * txtServiceRate.Value < 0) Then
+                Exit Do
+            End If
+        Loop
+    End If
+    
+    
+    Sheet3.Activate
+    pb = 1
+    Do While True
+
+        Range("A:A").Clear
+        factorial = 1
+        For l = 1 To c
+            factorial = factorial * l
+            Cells(l, 1) = (lambda / mew) ^ l / factorial
+        Next l
+
+        factorial = 1
+        For i = 1 To c
+            factorial = factorial * i
+        Next i
+        pb = (lambda / mew) ^ c / (factorial * Cells(1, 2).Value)
+        Cells(1, 3) = pb
+        
+        If (pb - Prob < 0) Then
+            Cells(1, 4) = c
+            Exit Do
+        End If
+        c = c + 1
+    Loop
+    Sheet1.Activate
+    ActiveCell.Offset(0, 4).Value = c
+    txtNumServer.Value = c
+    
+End Sub
