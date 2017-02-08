@@ -1,3 +1,5 @@
+
+
 Private Sub cmdCancel_Click()
     Unload Me
 End Sub
@@ -58,4 +60,20 @@ Private Sub cmdSubmit_Click()
     ActiveCell.Offset(0, 4).Value = c
     txtNumServer.Value = c
     
+    Sheet3.Activate
+    factorial = 1
+    For j = 1 To c
+        factorial = factorial * j
+        Cells(j, 6).Value = (lambda / mew) ^ j / (factorial * Cells(1, 2).Value)
+    Next
+    EN = 0
+    For j = 1 To c
+        EN = EN + j * Cells(j, 6).Value
+    Next
+    txtEN.Value = EN
+    
+End Sub
+
+Private Sub frmInput_Click()
+
 End Sub
