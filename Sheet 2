@@ -1,0 +1,9 @@
+Private Sub cmdClearRecord_Click()
+    Range("RecordC").Clear
+End Sub
+
+Private Sub cmdErlangC_Click()
+    Load frmErlang2
+    
+    frmErlang2.Show
+End Sub
