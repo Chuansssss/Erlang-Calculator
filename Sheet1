@@ -1,0 +1,11 @@
+Private Sub cmdClear_Click()
+    Range("RecordB").Clear
+End Sub
+
+Private Sub cmdErlangCalculator1_Click()
+
+    Load frmErlang1
+    
+    frmErlang1.Show
+    
+End Sub
